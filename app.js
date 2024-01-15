@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const userRouter = require('./routes/user_routes');
 const adminRouter = require('./routes/admin_routes');
+const movieRouter = require('./routes/movie_routes');
 
 dotenv.config();
 
@@ -10,6 +11,7 @@ const app = express();
 app.use(express.json());
 app.use("/user", userRouter)
 app.use("/admin", adminRouter)
+app.use("/movie", movieRouter)
 
 mongoose.connect(`mongodb+srv://admin:${process.env.MONGODB_PASSWORD}@cluster0.p87x1xv.mongodb.net/?retryWrites=true&w=majority`)
     .then(() => {
