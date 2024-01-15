@@ -6,6 +6,7 @@ const userRouter = require('./routes/user_routes');
 dotenv.config();
 
 const app = express();
+app.use(express.json());
 app.use("/user", userRouter)
 
 mongoose.connect(`mongodb+srv://admin:${process.env.MONGODB_PASSWORD}@cluster0.p87x1xv.mongodb.net/?retryWrites=true&w=majority`)
