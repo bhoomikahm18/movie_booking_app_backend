@@ -1,3 +1,4 @@
+const Bookings = require("../models/Bookings.js");
 const User = require("../models/User.js");
 const bcrypt = require("bcryptjs")
 module.exports.getAllUsers = async (req, res, next) => {
@@ -114,4 +115,20 @@ module.exports.login = async (req, res, next) => {
     return res
         .status(200)
         .json({ message: "Login Successfull" });
+};
+
+module.exports.getBookingsOfUser = async (req, res, next) => {
+    const id = req.params.id;
+    let bookings;
+    try {
+        bookings = await Bookings.find({ user: id })
+            .populate("movie")
+            .populate("user");
+    } catch (err) {
+        return console.log(err);
+    }
+    if (!bookings) {
+        return res.status(500).json({ message: "Unable to get Bookings" });
+    }
+    return res.status(200).json({ bookings });
 };
