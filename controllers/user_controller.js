@@ -34,7 +34,7 @@ module.exports.singup = async (req, res, next) => {
         user = new User({ name, email, password: hashedPassword });
         user = await user.save();
     } catch (err) {
-        return console.log(err);
+        return res.status(501).json({ message: "User Already Exist! Login Instead" });
     }
     if (!user) {
         return res.status(500).json({ message: "Unexpected Error Occured" });

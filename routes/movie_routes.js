@@ -1,10 +1,10 @@
 const express = require('express');
-const { addMovie, getAllMovies } = require('../controllers/movie_controller');
+const { addMovie, getAllMovies, getMovieById } = require('../controllers/movie_controller');
 
 const movieRouter = express.Router();
 
-movieRouter.post("/", addMovie);
+movieRouter.post("/add", addMovie);
 movieRouter.get("/", getAllMovies);
-movieRouter.get("/:id", );
+movieRouter.get("/:id", getMovieById);
 
 module.exports = movieRouter;

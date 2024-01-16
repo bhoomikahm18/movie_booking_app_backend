@@ -70,3 +70,19 @@ module.exports.getAllMovies = async (req, res, next) => {
     }
     return res.status(200).json({ movies });
 };
+
+module.exports.getMovieById = async (req, res, next) => {
+    const id = req.params.id;
+    let movie;
+    try {
+        movie = await Movie.findById(id);
+    } catch (err) {
+        return console.log(err);
+    }
+
+    if (!movie) {
+        return res.status(404).json({ message: "Invalid Movie ID" });
+    }
+
+    return res.status(200).json({ movie });
+};
