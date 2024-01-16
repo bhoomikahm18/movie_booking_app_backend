@@ -65,3 +65,15 @@ module.exports.adminLogin = async (req, res, next) => {
         .json({ message: "Authentication Complete", token, id: existingAdmin._id });
 };
 
+module.exports.getAdmins = async (req, res, next) => {
+    let admins;
+    try {
+        admins = await Admin.find();
+    } catch (err) {
+        return console.log(err);
+    }
+    if (!admins) {
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
+    return res.status(200).json({ admins });
+};
